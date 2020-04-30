@@ -82,7 +82,7 @@ jobs:
         version: pypy-2.2.1
     environment:
       CLOUDIFY_SSL_TRUST_ALL: true
-      IAAS: gcp
+      IAAS: aws
     steps:
       - checkout
       - run:
