@@ -165,6 +165,7 @@ workflows:
       - cloudify-manager:
           requires:
             - wagon
+            - unittests
           filters:
             branches:
               only: /([0-9\.]*\-build|master|dev|blueprint-test)/
