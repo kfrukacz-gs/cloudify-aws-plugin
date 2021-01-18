@@ -106,7 +106,7 @@ class LambdaFunction(LambdaBase):
     @contextmanager
     def _encode_payload(self, payload):
         if isinstance(payload, str):
-            with file(payload, 'r') as payload_file:
+            with file(payload, 'rb') as payload_file:
                 yield payload_file
         elif isinstance(payload, dict):
             yield json.dumps(payload).encode(self.resource_encoding)
