@@ -106,15 +106,17 @@ class LambdaFunction(LambdaBase):
     @contextmanager
     def _encode_payload(self, payload):
         if isinstance(payload, str):
-            with file(payload, 'rb') as payload_file:
+            with open(payload, 'r') as payload_file:
                 yield payload_file
         elif isinstance(payload, dict):
-            yield json.dumps(payload).encode(self.resource_encoding)
+            yield json.dumps(payload)
         else:
             yield payload
 
     def _decode_payload(self, payload_stream):
-        payload = payload_stream.read().decode(self.resource_encoding)
+        payload = payload_stream.read()
+        if isinstance(payload, bytes):
+            payload = payload.decode(self.resource_encoding)
         try:
             payload = json.loads(payload)
             if payload.get('body'):
